@@ -1,11 +1,11 @@
 # LLM-Powered-Copywriting-Diagnosis-Hot-Seller-Prediction-for-E-Commerce
-# 🛒 智慧電商數據分析平台 (E-Commerce LLM & Analytics Project)
+# 智慧電商數據分析平台 (E-Commerce LLM & Analytics Project)
 
 > 結合 **大型語言模型（LLM）特徵工程**、**機器學習分類器**、**語意搜尋 Embedding** 與 **時間序列預測** 的端到端電商智慧化解決方案。
 
 ---
 
-## 📋 系統資料庫架構 (DuckDB Schema)
+## 系統資料庫架構 (DuckDB Schema)
 
 為了實現高效的數據儲存與查詢，本專案全面整合 `DuckDB` 嵌入式資料庫。以下為資料庫表結構與關係圖：
 
