@@ -33,7 +33,7 @@ erDiagram
 
 ---
 
-## 🌟 專案一｜電商 LLM 熱銷預測系統
+## 專案一｜電商 LLM 熱銷預測系統
 
 **路徑：** `01_etl.ipynb` ~ `04_explain.ipynb`
 
@@ -59,7 +59,7 @@ Amazon 商品原始數據 (Kaggle)
 
 ### 3. Notebook 實作細節
 
-#### 📥 [01_etl.ipynb (資料 ETL 與 DuckDB 整合)](file:///Users/Flora/Desktop/ecommerce-llm-project/01_etl.ipynb)
+#### [01_etl.ipynb (資料 ETL 與 DuckDB 整合)]
 - **Step 1｜透過 Kaggle API 下載資料**：自動下載 `karkavelrajaj/amazon-sales-dataset` 原始數據集。
 - **Step 2｜讀取 CSV 並確認欄位**：載入 Amazon 原始數據並檢視基礎屬性。
 - **Step 3｜資料清洗與熱銷標籤定義**：
@@ -69,11 +69,11 @@ Amazon 商品原始數據 (Kaggle)
   - 建立資料庫表格：`raw_products` 與 `features`。
   - 使用嵌入式 `DuckDB` 資料庫直接儲存清洗後的數據，為後續特徵融合提供高效的關係型查詢。
 
-#### 🧠 [02_llm_features.ipynb (LLM 非結構化特徵提取)](file:///Users/Flora/Desktop/ecommerce-llm-project/02_llm_features.ipynb)
+#### [02_llm_features.ipynb (LLM 非結構化特徵提取)]
 - **Step 1｜從 DuckDB 讀取待處理商品**：讀取商品的標題 (`title`) 與描述 (`description`)。
 - **Step 2｜定義分析函式與 Prompt 設計**：
   - **Prompt Engineering**：採用嚴格的 **JSON Output 限制 Prompt**。要求 LLM 僅回傳包含 `"copywriting_attractiveness"`、`"sentiment_score"` 與 `"has_discount_keyword"` 三個 key 的 JSON。
-    > 💡 **這三個分數是如何決定的？**
+    >  **這三個分數是如何決定的？**
     > 這裡展現了 **LLM 特徵工程** 的精髓：我們不依賴傳統的 NLP 規則或關鍵字計數，而是直接讓 LLM 扮演「電商文案分析師」進行語意評分：
     > 1. **文案吸引力 (`copywriting_attractiveness`)**：LLM 憑藉預訓練知識，判斷文案是否生動、具說服力，給出 `0.0~1.0` 的評分。
     > 2. **情感正面度 (`sentiment_score`)**：LLM 分析文字語氣，強烈推薦為 `1.0`，平淡或負面則分數較低。
@@ -82,7 +82,7 @@ Amazon 商品原始數據 (Kaggle)
 - **Step 3｜批次萃取特徵並寫入 DuckDB**：
   - 呼叫 Groq 平台的 `llama-3.3-70b-versatile` 模型以超低延遲取得結構化輸出，並將解析成功的 LLM 特徵安全寫入 DuckDB 的 `features` 表格中。
 
-#### 📊 [03_train.ipynb (XGBoost 熱銷分類模型訓練)](file:///Users/Flora/Desktop/ecommerce-llm-project/03_train.ipynb)
+####  [03_train.ipynb (XGBoost 熱銷分類模型訓練)]
 - **Step 1｜從 DuckDB 讀取訓練資料**：利用 SQL 進行 JOIN，合併 `raw_products` 與 `features`。
 - **Step 2｜特徵工程與資料切分**：
   - 提取數值特徵 (`price` 等) 與 LLM 產生的 3 個文案特徵，融合成特徵矩陣。
@@ -98,9 +98,9 @@ Amazon 商品原始數據 (Kaggle)
   
   ![Feature Importance](data/feature_importance.png)
   
-  > 💡 **關鍵發現**：從特徵重要性分析中可以看到，雖然「商品折扣價 (discount_price)」與「定價 (price)」仍然是決定商品是否熱銷的最核心要素，但由 LLM 萃取出的語意特徵「情感正面度 (sentiment_score)」與「文案吸引力 (copywriting_attractiveness)」同樣提供了不可忽視的預測貢獻度。這證實了除了價格戰之外，**優質且具備高吸引力的商品文案** 確實能為商品熱銷帶來實質的正向影響！
+  >  **關鍵發現**：從特徵重要性分析中可以看到，雖然「商品折扣價 (discount_price)」與「定價 (price)」仍然是決定商品是否熱銷的最核心要素，但由 LLM 萃取出的語意特徵「情感正面度 (sentiment_score)」與「文案吸引力 (copywriting_attractiveness)」同樣提供了不可忽視的預測貢獻度。這證實了除了價格戰之外，**優質且具備高吸引力的商品文案** 確實能為商品熱銷帶來實質的正向影響！
 
-#### 📈 [04_explain.ipynb (LLM 銷量診斷報告與對比圖表)](file:///Users/Flora/Desktop/ecommerce-llm-project/04_explain.ipynb)
+####  [04_explain.ipynb (LLM 銷量診斷報告與對比圖表)]
 - **Step 1 & 2｜載入模型與極端對比案例**：選取模型預測「非熱銷商品 (Case A)」與「熱銷商品 (Case B)」兩組對照案例。
 - **Step 3｜定義雙階段分析與轉譯流程**：
   解決傳統機器學習「黑盒子冷酷數字」的痛點，將預測數字翻譯成具體的行銷決策：
@@ -135,7 +135,7 @@ Amazon 商品原始數據 (Kaggle)
 
 ---
 
-## 🌟 專案二｜語意搜尋與內容推薦系統
+## 專案二｜語意搜尋與內容推薦系統
 
 **路徑：** `05_semantic_recommendation.ipynb`
 
@@ -159,12 +159,12 @@ Query / 輸入商品 ➡️ 向量轉換 ➡️ 計算 Cosine Similarity ➡️ 
   
   ![Similarity Distribution](data/similarity_distribution.png)
   
-  > 💡 **相似度分數解讀**：上圖展示了資料庫中商品對之間的相似度分數分佈，主要集中在 0.2 至 0.5 之間，這能有效區分出真正高度相似的商品（相似度 > 0.75）。
+  >  **相似度分數解讀**：上圖展示了資料庫中商品對之間的相似度分數分佈，主要集中在 0.2 至 0.5 之間，這能有效區分出真正高度相似的商品（相似度 > 0.75）。
 - **跨品牌推薦驗證**：專案成功展現跨品牌檢索能力，例如查詢 "Wireless Mouse" (無線滑鼠)，能精準推薦不同品牌 (Logitech, Dell, HP, Amazon Basics) 且屬性相近的滑鼠，展現了強大的語意泛化與對齊能力。
 
 ---
 
-## 🌟 專案三｜英國電商時間序列銷售預測
+## 專案三｜英國電商時間序列銷售預測
 
 **路徑：** `06_timeseries_forecast.ipynb`
 
@@ -199,7 +199,7 @@ Query / 輸入商品 ➡️ 向量轉換 ➡️ 計算 Cosine Similarity ➡️ 
 | **Linear Regression** | 17.4% | 188,694 GBP | 簡單快速，適合歷史規律極穩定的情形。 |
 | **Prophet** | 36.3% | 316,826 GBP | 適合小資料集、有強烈年/週季節性規律的商業可解釋分析。 |
 
-> 📊 **模型決策分析**：在本專案中，由於歷史營收只有 25 個月，資料點較少，因此不適合採用 LSTM 等深度學習網路（通常需要數百個以上時間點）。我們通過**特徵工程 (創建 Lag 1 與 Lag 2 延遲特徵)**，使得 XGBoost 能夠直接學到前幾個月的營收關聯，將 MAPE 降到了超低的 **0.8%**。
+>  **模型決策分析**：在本專案中，由於歷史營收只有 25 個月，資料點較少，因此不適合採用 LSTM 等深度學習網路（通常需要數百個以上時間點）。我們通過**特徵工程 (創建 Lag 1 與 Lag 2 延遲特徵)**，使得 XGBoost 能夠直接學到前幾個月的營收關聯，將 MAPE 降到了超低的 **0.8%**。
 
 ---
 
