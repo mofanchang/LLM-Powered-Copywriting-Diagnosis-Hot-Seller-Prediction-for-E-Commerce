@@ -104,22 +104,22 @@ Amazon 商品原始數據 (Kaggle)
 - **Step 1 & 2｜載入模型與極端對比案例**：選取模型預測「非熱銷商品 (Case A)」與「熱銷商品 (Case B)」兩組對照案例。
 - **Step 3｜定義雙階段分析與轉譯流程**：
   解決傳統機器學習「黑盒子冷酷數字」的痛點，將預測數字翻譯成具體的行銷決策：
-  
+
   ```mermaid
   flowchart TD
-      subgraph Stage1 [第一階段：機器學習數值預測 (ML Prediction)]
-          A[定價 price & 折扣價 discount_price] --> D[XGBoost / SKLearn Classifier]
-          B[文案吸引力 copywriting_attractiveness] --> D
-          C[情感正面度 sentiment_score & 折扣關鍵字 has_discount_keyword] --> D
-          D -->|預測| E[冷冰冰的預測機率：例如 14.7%]
+      subgraph Stage1 ["第一階段 - 機器學習數值預測 (ML Prediction)"]
+          A["定價 price + 折扣價 discount_price"] --> D["XGBoost / SKLearn Classifier"]
+          B["文案吸引力 copywriting_attractiveness"] --> D
+          C["情感正面度 sentiment_score + 折扣關鍵字 has_discount_keyword"] --> D
+          D -->|預測| E["預測機率，例如 14.7%"]
       end
-      
-      subgraph Stage2 [第二階段：LLM 語意理解與中文診斷 (LLM Diagnosis)]
-          E -->|數值輸入| H[Groq Llama-3.3-70b 行銷顧問]
-          F[原始商品標題 Title & 描述 Description] -->|長文本輸入| H
-          G[市場回饋數據 Rating & Rating Count] -->|表現指標| H
-          H -->|翻譯與解讀| I[繁體中文銷量診斷報告]
-          H -->|可執行方案| J[3 點可立即複製貼上的英文行銷文案改寫範例]
+
+      subgraph Stage2 ["第二階段 - LLM 語意理解與中文診斷 (LLM Diagnosis)"]
+          E -->|數值輸入| H["Groq Llama-3.3-70b 行銷顧問"]
+          F["商品標題 Title + 描述 Description"] -->|長文本輸入| H
+          G["市場回饋 Rating + Rating Count"] -->|表現指標| H
+          H -->|翻譯與解讀| I["繁體中文銷量診斷報告"]
+          H -->|可執行方案| J["3 點英文文案改寫範例"]
       end
   ```
 - **Step 4｜產生診斷報告**：
