@@ -237,6 +237,3 @@ cp .env.example .env
 
 ---
 
-## ⚠️ 注意事項與硬體需求
-- **API Key 安全**：請注意 `.env` 檔案已列入 `.gitignore`，**請絕對不要將真實的 API Key 上傳至 Git 平台**！
-- **macOS 硬體加速**：本專案在訓練 XGBoost 時，如果使用的是 macOS (M 系列晶片) 且報錯缺少 OpenMP，可藉由 `brew install libomp` 解決。如果仍有異常，代碼已內建自動向下相容機制，會自動切換為 `sklearn` 的 `GradientBoostingClassifier` 進行順利訓練。
