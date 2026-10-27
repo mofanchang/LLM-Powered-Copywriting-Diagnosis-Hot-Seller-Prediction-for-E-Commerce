@@ -175,7 +175,8 @@ flowchart LR
 - 月營收趨勢：呈現 25 個月份的營收變化。
 - 國家營收排名：依總營收排序，呈現前十名市場。
 
-![營運總覽](data/dashboard_page1.png)
+![營運總覽 Dashboard](data/dashboard_page1.png)
+
 
 **第二頁｜商品與市場**
 
@@ -183,7 +184,7 @@ flowchart LR
 - 市場分布視覺化：【待填：實際完成的圖表，地圖或排除英國的樹狀圖】
 - 月份 × 國家營收矩陣，觀察不同市場的月度營收變化。
 
-![商品與市場](data/dashboard_page2.png)
+![商品與市場 Dashboard](data/dashboard_page2.png)
 
 ### 4.3 主要分析觀察
 
